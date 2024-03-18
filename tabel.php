@@ -24,34 +24,36 @@
             <table>
                 <thead>
                     <tr class="color-header"> <!-- Tambahkan kelas color-header untuk header berwarna -->
+                        <th>No</th>
                         <th>Nama</th>
-                        <th>Tanggal Lahir</th>
                         <th>Jenis Kelamin</th>
+                        <th>Tanggal Lahir</th>
                         <th>Pilihan Lomba</th>
                         <th>Kategori</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-
-                    include 'koneksi.php';
-$sql = "SELECT * FROM pilihan_lomba";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-  
-  while($row = $result->fetch_assoc()) {
-    echo "<tr>";
-    echo "<td>" . $row["nama"] . "</td>";
-    echo "<td>" . $row["ttl"] . "</td>";
-    echo "<td>" . $row["jk"] . "</td>";
-    echo "<td>" . $row["pilihan_lomba"] . "</td>";
-    echo "<td>" . $row["kategori"] . "</td>";
-    echo "</tr>";
-  }
-}
-
-                    ?>
+        include "koneksi.php";
+        $sql = "SELECT * FROM pilihan_lomba";
+        $result = $conn->query($sql);
+        $nomor = 1;
+        while($data = mysqli_fetch_array($result)){
+        ?>
+        <tr>
+            <td><?php echo $nomor++; ?></td>
+            <td><?php echo $data['nama']; ?></td>
+            <td><?php echo $data['jk']; ?></td>
+            <td><?php echo $data['ttl']; ?></td>
+            <td><?php echo $data['jenis_lomba']; ?></td>
+            <td><?php echo $data['kategori']; ?></td>
+            <td>
+                <a class="edit" href="edit.php?id=<?php echo $data['id']; ?>">Edit</a> |
+                <a class="hapus" href="hapus.php?id=<?php echo $data['id']; ?>">Hapus</a>                   
+            </td>
+        </tr>
+        <?php } ?>
                    
                 </tbody>
             </table>

@@ -67,7 +67,7 @@
                  
                 <div class="grid-x grid-padding-x">
                     <div class="cell">
-                        <button type="submit" class="button primary">Submit</input>
+                        <button type="submit" name="submit" class="button primary">Submit</input>
                     </div>
                 </div>
             </form>

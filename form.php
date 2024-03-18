@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $kategori = $_POST['kategori'];
 
         $query = "INSERT INTO pilihan_lomba(nama, jk, ttl, jenis_lomba, kategori) VALUES('$nama', '$jk', '$ttl', '$jenis_lomba', '$kategori')";
-        $result = query($conn, $query);
+        $result = mysqli_query($conn, $query);
  
         if($result){
             header('Location: index.php');
