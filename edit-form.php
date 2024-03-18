@@ -17,18 +17,29 @@
         <div class="cell">
             <h2>Form Edit dengan Select Option</h2>
             <!-- Form -->
-            <form action="form.php" method="POST">
+                <?php 
+    include "koneksi.php";
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM pilihan_lomba WHERE id='$id'";
+    $result = $conn->query($sql);
+    $jenis_kelamin    = array('Laki-laki','Perempuan');
+    $jenis_lomba    = array('Desain Grafis','Speed Typing');
+    $kategori    = array('SMP','SMA', 'Mahasiswa');
+    
+    while($data = mysqli_fetch_array($result)){
+    ?>
+            <form action="edit.php" method="POST">
                 <!-- Input text -->
                 <div class="grid-x grid-padding-x">
                     <div class="cell medium-6">
                         <label>Nama
-                            <input type="text" name="nama" placeholder="Masukkan Nama Anda" required>
+                            <input type="text" name="nama" value="<?php echo $data['nama'] ?>" required>
                         </label>
                     </div>
                     <div class="cell medium-6">
                         <label>Tanggal Lahir
-                            <input type="date" name="ttl" placeholder="Masukkan Tanggal Lahir Anda" required>
-                        </label>
+                        <input type="date" name="ttl" value="<?php echo $data['ttl'] ?>" required>                       
+                     </label>
                     </div>
                     
                 </div>
@@ -37,18 +48,27 @@
                     <div class="cell medium-6">
                     <label for="jk">Jenis Kelamin:</label>
                     <select name="jk" required>
-                    <option value="" disabled selected hidden>pilih jenis kelamin</option>
-                     <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
+
+                     <?php
+                            foreach ($jenis_kelamin as $j){
+                                echo "<option value='$j' ";
+                                echo $data['jk']==$j?'selected="selected"':'';
+                                echo ">$j</option>";
+                            }
+                            ?>
                             </select>
 
                             </div>
                             <div class="cell medium-6">
                             <label for="pilihan_lomba">Pilihan Lomba:</label>
                     <select name="jenis_lomba" required>
-                    <option value=""disabled selected hidden>pilih lomba</option>
-                     <option value="Desain Grafis">Desain Grafis</option>
-                        <option value="Speed Typing">Speed Typing</option>
+                   <?php
+                            foreach ($jenis_lomba as $jl){
+                                echo "<option value='$jl' ";
+                                echo $data['jenis_lomba']==$jl?'selected="selected"':'';
+                                echo ">$jl</option>";
+                            }
+                            ?>
                             </select>
                             </div>  
                 </div>
@@ -56,10 +76,13 @@
                 <div class="cell medium-6">
                             <label for="kategori">Kategori:</label>
                     <select name="kategori" required>
-                    <option value=""disabled selected hidden>pilih kategori</option>
-                     <option value="SMP">SMP</option>
-                        <option value="SMA">SMA</option>
-                        <option value="Mahasiswa">Mahasiswa</option>
+                   <?php
+                            foreach ($kategori as $k){
+                                echo "<option value='$k' ";
+                                echo $data['kategori']==$k?'selected="selected"':'';
+                                echo ">$k</option>";
+                            }
+                            ?>
                             </select>
                             </div> 
                             </div> 
@@ -71,6 +94,7 @@
                     </div>
                 </div>
             </form>
+            <?php } ?>
         </div>
     </div>
 </div>

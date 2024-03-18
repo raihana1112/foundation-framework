@@ -14,7 +14,12 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($conn, $query);
  
         if($result){
-            header('Location: index.php');
+             echo
+  "<script>
+  alert('Data berhasil di tambah');
+  document.location.href = 'index.php';
+  </script>
+  ";
         }else{
          echo "Error: " . $query . "<br>" . $conn->error;
      }
