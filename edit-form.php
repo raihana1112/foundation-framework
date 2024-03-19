@@ -29,6 +29,7 @@
     while($data = mysqli_fetch_array($result)){
     ?>
             <form action="edit.php" method="POST">
+                <input type="hidden" name="id" value="<?= $data['id'] ?>">
                 <!-- Input text -->
                 <div class="grid-x grid-padding-x">
                     <div class="cell medium-6">

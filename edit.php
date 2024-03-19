@@ -13,7 +13,12 @@ $nama = $_POST['nama'];
         $result = mysqli_query($conn, $query);
  
         if($result){
-            header('Location: tabel.php');
+             echo
+  "<script>
+  alert('Data berhasil di update');
+  document.location.href = 'tabel.php';
+  </script>
+  ";
         }else{
          echo "Error: " . $query . "<br>" . $conn->error;
      }
